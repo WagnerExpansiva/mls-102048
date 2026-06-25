@@ -1,0 +1,83 @@
+{
+  "savedAt": "2026-06-25T13:05:49.495Z",
+  "agentName": "agentCriticPlanIndex",
+  "stepId": 91,
+  "planning": {
+    "planId": "plan-index-critic:pageIndex:1",
+    "dependsOn": [
+      "plan-page-index"
+    ],
+    "executionMode": "sequential",
+    "executionHost": "client"
+  },
+  "status": "waiting_after_prompt",
+  "payload": {
+    "type": "flexible",
+    "result": {
+      "toolName": "submitPlanIndexCritique",
+      "arguments": {
+        "status": "ok",
+        "result": {
+          "approved": false,
+          "errors": [
+            {
+              "code": "page.readUsecase.missing",
+              "message": "Página shiftOpen tem apenas usecaseHints de escrita (openDailyShift) e não tem metricRefs; como tela que exibe/depende de estado (turno atual/validações), falta ao menos um usecase de leitura (ex.: getTodayDashboardMetrics ou getDailyShiftStatus) para carregar status e contexto.",
+              "path": "pages[1]"
+            },
+            {
+              "code": "page.readUsecase.missing",
+              "message": "Página shiftClose descreve revisão de resumo pré-fechamento; porém usecaseHints só tem escrita (closeDailyShiftAndGenerateReport) e não tem metricRefs. Falta um usecase de leitura para carregar o resumo/pendências antes de confirmar (ex.: getShiftClosePreview/getTodayDashboardMetrics/getOrdersBlockingClose).",
+              "path": "pages[2]"
+            },
+            {
+              "code": "page.readUsecase.missing",
+              "message": "Página posFast inclui ação 'Retomar pedido em andamento' (exibe lista/último pedido) mas usecaseHints só tem escrita (createOrderDraft) e não tem metricRefs. Falta um usecase de leitura (ex.: listOrdersByStatus para drafts/inProgress do shift, ou getLastOpenOrder).",
+              "path": "pages[6]"
+            },
+            {
+              "code": "page.readUsecase.missing",
+              "message": "Página kdsIssueFlag precisa exibir dados do pedido/itens para contextualizar a sinalização, mas usecaseHints só tem escrita (updateKitchenOrderStatus) e não tem metricRefs. Adicionar um usecase de leitura (ex.: getOrderById) ou passar dados completos via navegação.",
+              "path": "pages[14]"
+            },
+            {
+              "code": "page.readUsecase.missing",
+              "message": "Página orderCancelConfirm deve exibir resumo do pedido e status atual antes de cancelar; porém usecaseHints só tem escrita (cancelOrder) e não tem metricRefs. Falta ao menos um usecase de leitura (ex.: getOrderById).",
+              "path": "pages[20]"
+            }
+          ],
+          "warnings": [
+            {
+              "code": "page.readUsecase.missing.falsePositive",
+              "message": "Página posSendToKitchenConfirm pode ser somente confirmação sem exibir dados; se não renderiza dados além de botões, a ausência de usecase de leitura é aceitável. Se renderiza resumo do pedido, adicionar getOrderById.",
+              "path": "pages[10]"
+            },
+            {
+              "code": "page.invented.page",
+              "message": "Página languageSwitcher não está entre páginas aprovadas (approvedArtifacts.pages) nem é necessária para cobrir capability now; pode ser escopo extra. Se mantida, justificar como parte obrigatória de bilingualUi e garantir ponto de entrada/navegação consistente.",
+              "path": "pages[29]"
+            }
+          ],
+          "notes": [
+            "Determinístico local listou as faltas de read-usecase como warnings, mas pelo contrato elas viram erro quando a página exibe dados (lista/resumo/preview) e só tem usecases de escrita.",
+            "Verificações de usecaseIds: todos os usecaseHints/bffCommandHints referenciam ids presentes em finalPlan.usecaseIds (ok).",
+            "Atores nas páginas usam apenas actorIds finais (attendantCashier/cook/managerOwner) (ok).",
+            "Página de dashboard de métricas existe e está restrita ao actor managerOwner (ok)."
+          ]
+        },
+        "questions": [
+          "A tela posSendToKitchenConfirm exibe algum resumo do pedido (itens/total) ou é só confirmação?",
+          "A tela shiftOpen precisa mostrar status/último turno/pendências (ex.: caixa anterior) ou é só formulário?",
+          "A tela shiftClose tem uma etapa de 'prévia' (resumo antes de fechar) separada de executar o fechamento? Se sim, qual usecase de leitura está previsto?"
+        ],
+        "trace": [
+          "Checked contract: read/query hint sufficiency for display/review pages; verified actorIds; verified metric dashboard presence for initialMetricsRequested; verified usecaseId references against finalPlan.usecaseIds; scanned for pages outside approvedArtifacts.pages."
+        ]
+      }
+    },
+    "status": "completed",
+    "stepId": 77,
+    "interaction": null,
+    "nextSteps": null
+  }
+}
