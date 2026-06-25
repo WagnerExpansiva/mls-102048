@@ -1,0 +1,89 @@
+{
+  "savedAt": "2026-06-25T13:02:12.692Z",
+  "agentName": "agentPlanAgents",
+  "stepId": 25,
+  "planning": {
+    "planId": "plan-agents",
+    "dependsOn": [
+      "plan-plugins",
+      "plan-usecase-entities",
+      "plan-workflow-definition"
+    ],
+    "executionMode": "sequential",
+    "executionHost": "client"
+  },
+  "status": "waiting_after_prompt",
+  "payload": {
+    "type": "flexible",
+    "result": {
+      "toolName": "submitAgentPlan",
+      "arguments": {
+        "status": "ok",
+        "result": {
+          "agents": [
+            {
+              "agentId": "salesInsightsAgent",
+              "title": "Agente de Insights de Vendas",
+              "purpose": "Orquestrar a geração de resumos de vendas do dia e sugestões de itens para promover (janela de 7 dias) via proxy LLM da plataforma, padronizando prompts, gerenciando idioma (pt-BR/en) e registrando cada execução em AiInsightRun para rastreabilidade.",
+              "trigger": "Solicitação explícita do gerente/dono na página do assistente IA (resumo do dia ou sugestões de promoção).",
+              "input": [
+                "Dados agregados de vendas do turno/dia (todaySalesMetrics)",
+                "Ranking de itens mais vendidos (topSellingItemsMetrics)",
+                "Dados do cardápio (menuItem)",
+                "Tipo de insight solicitado (resumo ou sugestão)",
+                "Idioma selecionado (pt-BR ou en)",
+                "Identificador do turno (DailyShift) quando aplicável"
+              ],
+              "output": [
+                "Texto do insight gerado pelo LLM",
+                "Registro da execução em AiInsightRun com status succeeded ou failed",
+                "Motivo da falha em caso de erro"
+              ],
+              "stopCriteria": [
+                "Insight gerado e armazenado com status succeeded",
+                "Falha registrada com status failed após esgotar retries",
+                "Solicitação cancelada pelo usuário"
+              ],
+              "permissions": [
+                "Ler métricas de vendas e itens mais vendidos",
+                "Ler dados do cardápio via MDM",
+                "Invocar proxy LLM da plataforma",
+                "Registrar execuções na tabela AiInsightRun"
+              ],
+              "allowedTools": [
+                "layer_3_usecases",
+                "platformLlmProxy",
+                "metricTables"
+              ],
+              "priority": "soon",
+              "persistenceRefs": [
+                "aiInsightRun"
+              ],
+              "usecaseRefs": [
+                "requestAiSalesSummary",
+                "requestAiPromoSuggestions",
+                "getAiInsightRun",
+                "listAiInsightRuns"
+              ],
+              "metricRefs": [
+                "todaySalesMetrics",
+                "topSellingItemsMetrics"
+              ]
+            }
+          ]
+        },
+        "questions": [],
+        "trace": [
+          "Análise dos workflows e capabilities identificou que o único agente operacional com ação externa aprovada é o assistente de IA para insights de vendas.",
+          "Os demais workflows (POS, KDS, estoque, turno) operam com transições síncronas e regras de negócio imediatas, sem necessidade de agentes de follow-up, escalonamento ou monitoramento autônomo no MVP.",
+          "Não há plugins aprovados para mensageria, pagamento ou ações externas, impedindo a criação de agentes autônomos de notificação ou integração.",
+          "O agente salesInsightsAgent foi planejado para orquestrar as execuções de IA via proxy LLM da plataforma, ler métricas derivadas e registrar resultados em AiInsightRun, conforme aprovado no blueprint."
+        ]
+      }
+    },
+    "status": "completed",
+    "stepId": 76,
+    "interaction": null,
+    "nextSteps": null
+  }
+}
