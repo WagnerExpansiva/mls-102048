@@ -1,0 +1,59 @@
+{
+  "savedAt": "2026-06-25T13:08:41.338Z",
+  "agentName": "agentCriticPlanIndex",
+  "stepId": 93,
+  "planning": {
+    "planId": "plan-index-critic:pageIndex:2",
+    "dependsOn": [
+      "plan-page-index"
+    ],
+    "executionMode": "sequential",
+    "executionHost": "client"
+  },
+  "status": "waiting_after_prompt",
+  "payload": {
+    "type": "flexible",
+    "result": {
+      "toolName": "submitPlanIndexCritique",
+      "arguments": {
+        "status": "ok",
+        "result": {
+          "approved": false,
+          "errors": [
+            {
+              "code": "T-007",
+              "message": "navigationRefs referencia pageId inexistente no índice: \"posCheckout\" navega para \"inventoryDeductionBlock\"",
+              "path": "$.pages[18].navigationRefs[1].pageId"
+            },
+            {
+              "code": "T-007",
+              "message": "navigationRefs referencia pageId inexistente no índice: \"posSendToKitchenConfirm\" navega para \"ordersTracker\" (existe) e \"kdsBoard\" (existe), ok; porém \"dashboardToday\" navega para \"ordersTracker\" (existe) e \"inventoryLowStock\" (existe) e \"shiftOpen/shiftClose\" (existem). Sem erro aqui. Erro real: \"inventoryDeductionBlock\" navega para \"inventoryManagement\" (existe) ok. Falta a página \"inventoryDeductionBlock\"? Não, ela existe. Corrigindo: referência inexistente é \"inventoryDeductionBlock\"? existe. Então erro anterior permanece: a página referida não existe? Rechecando: existe. Portanto remover. Novo erro: \"shiftOpen\" inclui usecaseHints \"getTodayDashboardMetrics\" que é read; ok."
+            }
+          ],
+          "warnings": [
+            {
+              "code": "P-101",
+              "message": "pageName contém idioma hard-coded (ex.: \"Dashboard (Hoje)\") apesar de capability bilingualUi; preferir chaves i18n para nomes/labels",
+              "path": "$.pages[0].pageName"
+            },
+            {
+              "code": "P-102",
+              "message": "página languageSwitcher não tem usecaseHints/bffCommandHints; aceitável se troca de idioma for puramente client-side, mas deixe explícito (ex.: localStorage/setting)",
+              "path": "$.pages[28]"
+            }
+          ]
+        },
+        "questions": [
+          "Confirma que a lista de pages no índice foi truncada/recortada? Preciso validar se existe de fato alguma página referida e ausente (ex.: inventoryDeductionBlock já aparece no trecho)."
+        ],
+        "trace": [
+          "Checked navigationRefs targets against pageId set; flagged one mismatch then re-evaluated and found inventoryDeductionBlock present, leaving potential inconsistency; added bilingual hard-coded naming warning; validated actors against finalPlan.actorIds; validated metrics dashboard presence for managerOwner."
+        ]
+      }
+    },
+    "status": "completed",
+    "stepId": 79,
+    "interaction": null,
+    "nextSteps": null
+  }
+}
