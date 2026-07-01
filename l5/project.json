@@ -12,6 +12,11 @@
       "language": "en",
       "name": "English",
       "path": "/"
+    },
+    {
+      "language": "pt-BR",
+      "name": "Portuguese",
+      "path": "/pt-BR"
     }
   ],
   "plugins": {},
@@ -20,6 +25,37 @@
   "links": [],
   "servicesConfigEnabled": false,
   "modules": [
+    {
+      "moduleName": "cafeFlow",
+      "backend": {
+        "backendControllers": "./_102048_/l1/cafeFlow/layer_1_external/adapters/http/controllers",
+        "persistence": {
+          "tableDefsDir": "./_102048_/l1/cafeFlow/layer_1_external/adapters/persistence"
+        },
+        "routeKeys": [
+          "cafeFlow.adjustStockLevel.adjustStockLevel",
+          "cafeFlow.createMenuItem.createMenuItem",
+          "cafeFlow.createStockItem.createStockItem",
+          "cafeFlow.createTable.createTable",
+          "cafeFlow.deleteMenuItem.deleteMenuItem",
+          "cafeFlow.deleteStockItem.deleteStockItem",
+          "cafeFlow.deleteTable.deleteTable",
+          "cafeFlow.orderLifecycle.launchOrder",
+          "cafeFlow.orderLifecycle.processPayment",
+          "cafeFlow.orderLifecycle.updateOrderStatus",
+          "cafeFlow.queryMenuItem.queryMenuItem",
+          "cafeFlow.queryStockItem.queryStockItem",
+          "cafeFlow.queryTable.queryTableById",
+          "cafeFlow.queryTable.queryTables",
+          "cafeFlow.shiftLifecycle.viewDashboard",
+          "cafeFlow.shiftLifecycle.viewShiftReportByDailyShiftId",
+          "cafeFlow.shiftLifecycle.viewShiftReportById",
+          "cafeFlow.updateMenuItem.updateMenuItem",
+          "cafeFlow.updateStockItem.updateStockItem",
+          "cafeFlow.updateTable.updateTable"
+        ]
+      }
+    }
   ],
   "dependencies": [
     {
