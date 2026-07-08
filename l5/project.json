@@ -1,12 +1,11 @@
 {
   "orgName": "expansiva",
-  "designSystems": [
-    {
-      "dsIndex": "0",
-      "dsName": "localDesignSystem",
-      "widgetIOName": "_100554_configDsDefault"
+  "designSystems": {
+    "1": {
+      "name": "default",
+      "description": "Default design system"
     }
-  ],
+  },
   "languages": [
     {
       "language": "en",
