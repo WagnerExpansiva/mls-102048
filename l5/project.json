@@ -1,21 +1,17 @@
 {
   "orgName": "expansiva",
-  "designSystems": {
-    "1": {
-      "name": "default",
-      "description": "Default design system"
+  "designSystems": [
+    {
+      "dsIndex": "0",
+      "dsName": "localDesignSystem",
+      "widgetIOName": "_100554_configDsDefault"
     }
-  },
+  ],
   "languages": [
     {
       "language": "en",
       "name": "English",
       "path": "/"
-    },
-    {
-      "language": "pt-BR",
-      "name": "Portuguese",
-      "path": "/pt-BR"
     }
   ],
   "plugins": {},
@@ -23,6 +19,25 @@
   "services": [],
   "links": [],
   "servicesConfigEnabled": false,
+  "modules": [
+  ],
+  "layouts": {
+    "1": {
+      "name": "Default"
+    },
+    "2": {
+      "name": "Ux 2"
+    },
+    "3": {
+      "name": "Ux 3"
+    }
+  },
+  "dependencies": [
+    {
+      "projectId": "102034",
+      "kind": "mdm-infrastructure"
+    }
+  ],
   "masters": {
     "frontend": {
       "masterProject": 102020,
@@ -33,76 +48,6 @@
       "masterProject": 102021,
       "agentFolder": "agentChangeBackend",
       "runtimeProject": 102034
-    }
-  },
-  "modules": [
-    {
-      "moduleName": "cafeFlow",
-      "backend": {
-        "backendControllers": "./_102048_/l1/cafeFlow/layer_1_external/adapters/http/controllers",
-        "persistence": {
-          "tableDefsDir": "./_102048_/l1/cafeFlow/layer_1_external/adapters/persistence"
-        },
-        "routeKeys": [
-          "cafeFlow.adjustStockLevel.adjustStockLevel",
-          "cafeFlow.createMenuItem.createMenuItem",
-          "cafeFlow.createStockItem.createStockItem",
-          "cafeFlow.createTable.createTable",
-          "cafeFlow.deleteMenuItem.deleteMenuItem",
-          "cafeFlow.deleteStockItem.deleteStockItem",
-          "cafeFlow.deleteTable.deleteTable",
-          "cafeFlow.orderLifecycle.launchOrder",
-          "cafeFlow.orderLifecycle.processPayment",
-          "cafeFlow.orderLifecycle.updateOrderStatus",
-          "cafeFlow.queryMenuItem.queryMenuItem",
-          "cafeFlow.queryStockItem.queryStockItem",
-          "cafeFlow.queryTable.queryTable",
-          "cafeFlow.queryTable.queryTableById",
-          "cafeFlow.queryTable.queryTables",
-          "cafeFlow.shiftLifecycle.viewDashboard",
-          "cafeFlow.shiftLifecycle.viewShiftReport",
-          "cafeFlow.shiftLifecycle.viewShiftReportByDailyShiftId",
-          "cafeFlow.shiftLifecycle.viewShiftReportById",
-          "cafeFlow.updateMenuItem.updateMenuItem",
-          "cafeFlow.updateStockItem.updateStockItem",
-          "cafeFlow.updateTable.updateTable"
-        ]
-      }
-    }
-  ],
-  "dependencies": [
-    {
-      "projectId": "102034",
-      "kind": "mdm-infrastructure"
-    },
-    {
-      "projectId": "102025",
-      "kind": "collab-messages-frontend"
-    },
-    {
-      "projectId": "102036",
-      "kind": "collab-messages-runtime"
-    }
-  ],
-  "customize": {
-    "clientShell": {
-      "mode": "spa",
-      "activeProfile": "production",
-      "regions": {
-        "aside": {
-          "activeProfile": "messages",
-          "profiles": {
-            "messages": {
-              "renderer": {
-                "entrypoint": "/_102048_/l2/cafeFlow/messagesAside.js",
-                "source": "l2/cafeFlow/messagesAside.ts",
-                "tag": "cafe-flow-messages-aside-102048"
-              },
-              "widthPx": 400
-            }
-          }
-        }
-      }
     }
   }
 }
